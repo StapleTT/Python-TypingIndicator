@@ -39,8 +39,10 @@ if (len(info) == 0):
         info = file.read().splitlines()
     print("Successfully configured!")
 
+token = os.getenv("TOKEN")
+
 header = {
-    'authorization': os.getenv("TOKEN")
+    'authorization': token
 }
 
 configure_channel()
