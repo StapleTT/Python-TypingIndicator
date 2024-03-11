@@ -21,12 +21,18 @@ def send_typing():
     r = requests.post("https://discord.com/api/v9/channels/" + channel_id + "/typing", headers=header)
     time.sleep(5)
 
+def start_typing():
+    while 1 == 1:
+        send_typing()
+
 if (len(info) == 0):
     print("Missing token! Attempting to reconfigure...")
     time.sleep(2)
     configure_token()
-    print("Successfully configured! typingindicator.py again to start the bot.")
-    exit()
+    time.sleep(1)
+    with open("info.txt", "r") as file:
+        info = file.read().splitlines()
+    print("Successfully configured!")
 
 header = {
     'authorization': info[0]
@@ -34,6 +40,4 @@ header = {
 
 configure_channel()
 print("Started typing indicator! Press CTRL+C to stop.")
-
-while 1 == 1:
-    send_typing()
+start_typing()
