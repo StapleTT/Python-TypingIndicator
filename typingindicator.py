@@ -1,14 +1,19 @@
 import requests
 import time
+import dotenv
+import os
+from dotenv import load_dotenv
 
-with open("info.txt", "r") as file:
+load_dotenv()
+
+with open(".env", "r") as file:
     info = file.read().splitlines()
 
 def configure_token():
     try:
         token = input("Discord token: ")
-        with open("info.txt", "w") as file:
-            file.write(f"{token}")
+        with open(".env", "w") as file:
+            file.write(f"TOKEN = {token}")
     except Exception as e:
         print(f"Error configuring Discord token{e}")
         exit()
@@ -30,12 +35,12 @@ if (len(info) == 0):
     time.sleep(2)
     configure_token()
     time.sleep(1)
-    with open("info.txt", "r") as file:
+    with open(".env", "r") as file:
         info = file.read().splitlines()
     print("Successfully configured!")
 
 header = {
-    'authorization': info[0]
+    'authorization': os.getenv("TOKEN")
 }
 
 configure_channel()
