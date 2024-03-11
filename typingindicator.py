@@ -30,7 +30,7 @@ def start_typing():
     while 1 == 1:
         send_typing()
 
-if (len(info) == 0):
+if (len(os.getenv("TOKEN"))):
     print("Missing token! Attempting to reconfigure...")
     time.sleep(2)
     configure_token()
